@@ -4,9 +4,11 @@
 
  GwMinitel - Passerelle Minitel vers le serveur Hydris via Internet v0.30
 
- /serial:<ttySerial> : Driver vers le port série sur lequel est connecté le Minitel. (OBLIGATOIRE)
-                       Exemples: /dev/tty.usbserial-A5069RR4 sur Mac pour un câble FT232RL du vendeur R-Ecommerce sur eBay.
-                                 /dev/ttyUSB0 sous Debian Linux pour le même câble.
+ /serial:<ttySerial> : 
+     Driver vers le port série sur lequel est connecté le Minitel. (OBLIGATOIRE)
+     Exemples: /dev/tty.usbserial-A5069RR4 sur Mac pour un câble FT232RL 
+               du vendeur R-Ecommerce sur eBay.
+               /dev/ttyUSB0 sous Debian Linux pour le même câble.
 
  /server:<ip server> : Nom DNS ou adresse IPV4 du serveur Hydris sur Internet.
 
