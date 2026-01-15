@@ -1,7 +1,5 @@
 
-Passerelle de communication Minitel vers le moniteur Videotex des années 90' Hydris
-
-                              VERSION DE TEST ! 
+                                            VERSION DE TEST ! 
 
 
  GwMinitel - Passerelle Minitel vers le serveur Hydris via Internet v0.30
