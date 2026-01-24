@@ -30,6 +30,6 @@ Options de la ligne de commande :
  <strong>/debug</strong>              : Active le dump de tout ce qui arrive du frontal et du Minitel.
 
 
-    Exemple: ./gwminitel /serial:/dev/tty.usbserial-A5069RR4
+    Exemple minimal: ./gwminitel /serial:/dev/tty.usbserial-A5069RR4
 
  
