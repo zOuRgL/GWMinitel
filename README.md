@@ -16,10 +16,13 @@ Un câble USB -> DIN sera utilisé pour la liaison entre le PC et le Minitel
   
 Options de la ligne de commande : 
 
-| Option                      | Libellé                                                                                            |
+| Paramètre                   | Libellé                                                                                            |
 |-----------------------------|----------------------------------------------------------------------------------------------------|
-| <strong>/serial:&lt;ttySerial&gt;</strong> | Driver vers le port série sur lequel est connecté le Minitel (OBLIGATOIRE).  |
-
+| /serial:&lt;ttySerial&gt;   | Driver vers le port série sur lequel est connecté le Minitel (OBLIGATOIRE).  |
+| /server:&lt;server&gt;      | Nom DNS ou adresse IPV4 du serveur Hydris sur Internet (défaut galaxy.microtel.fr) |
+| /port:&lt;port num&gt;      | Numéro de port du serveur Hydris (défaut 50456) |
+| /nospeed                    | Pas de gestion automatique de la vitesse en baud par Hydris. |
+| /debug</strong>             | Active le dump de tout ce qui arrive du frontal et du Minitel. |
 
 
  <strong>/serial:&lt;ttySerial&gt;</strong> : Driver vers le port série sur lequel est connecté le Minitel (OBLIGATOIRE).<br><br>
