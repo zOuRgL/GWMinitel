@@ -11,10 +11,13 @@
  * mais SANS AUCUNE GARANTIE.
 
 
-    Passerelle de connexion Mac/Linux vers frontal Hydris pour un Minitel local
+    Passerelle de communication Mac/Linux pour un Minitel vers le frontal Hydris
 
                                                                        '2026
 
+
+    Une connexion web via l'émulateur MiniPavi est aussi possible à l'adresse wss://galaxy.microtel.fr:50123
+    https://www.minipavi.fr/emulminitel/indexws.php?url=wss%3A%2F%2Fgalaxy.microtel.fr%3A50123&speed=4800&color=false
 
     Compilation classique avec : 
         Mac/Linux : gcc gwminitel.c -o gwminitel 
@@ -31,6 +34,11 @@
  ESC 39 (9) XX            ! Commandes protocole a un argument (PRO1).	  
  ESC 3A (:) XX XX         ! Commandes protocole a deux arguments (PRO2).   
  ESC 3B (;) XX XX XX      ! Commandes protocole a trois arguments (PRO3). 
+
+ ENQ ROM    \x1b\x39\x7b
+
+ Kb Min     \x1b\x3a\x69\x45    Esc:iE
+ Kb Maj     \x1b\x3a\x6A\x45    Esc:jE
 
 */
 
@@ -54,7 +62,7 @@
 #include <netdb.h>
 
 //
-#define VERSION       "0.30"
+#define VERSION       "0.32"
 // 
 
 #define FALSE              0
@@ -507,23 +515,24 @@ int main(int argc, char *argv[]) {
 
     Dump = FALSE;
     speedMode = TRUE;
-
+    
     if ( argc < 2 || argc >= 2 && !strcmp( argv[1], "/?" )){
-        printf("\n GwMinitel - Passerelle Minitel vers le serveur Hydris via Internet v%s\n\n", VERSION);
+        printf("\n  GwMinitel v%s - Passerelle pour une connexion Minitel vers le serveur Hydris\n\n", VERSION);
+        printf( "   ------------------------------------------------------------------------------\n\n");
 
-        printf(" /serial:<ttySerial> : Driver vers le port série sur lequel est connecté le Minitel. (OBLIGATOIRE)\n");
-        printf("                       Exemples: /dev/tty.usbserial-A5069RR4 sur Mac pour un câble FT232RL du vendeur R-Ecommerce sur eBay.\n");
-        printf("                                 /dev/ttyUSB0 sous Debian Linux pour le même câble.\n");
+        printf("  Exemple d'utilisation: ./gwminitel /serial:/dev/tty.usbserial-A5069RR4\n\n\n  OPTIONS:\n\n");
+        printf("  /serial:<ttySerial> : Driver vers le port série sur lequel est connecté le Minitel. (OBLIGATOIRE)\n");
+        printf("                        Exemples: /dev/tty.usbserial-A5069RR4 sur Mac pour un câble FT232RL du vendeur R-Ecommerce sur eBay.\n");
+        printf("                                  /dev/ttyUSB0 sous Debian Linux pour le même câble.\n");
 
-        printf("\n /server:<ip server> : Nom DNS ou adresse IPV4 du serveur Hydris sur Internet.\n");
+        printf("\n  /server:<ip server> : Nom DNS ou adresse IPV4 du serveur Hydris sur Internet (défaut galaxy.microtel.fr).\n");
 
-        printf("\n /port:<port num>    : Numéro de port du serveur Hydris (défaut 50456)\n");
+        printf("\n  /port:<port num>    : Numéro de port du serveur Hydris (défaut 50456).\n");
 
-        printf("\n /nospeed            : Pas de gestion automatique de la vitesse en baud par Hydris.\n" );
-        printf("                       (utile en cas d'utilisation d'un MINITEL 1 ou bien en cas de problèmes\n");
-        printf("                        lors de saisies de données sans attendre la fin d'affichage)\n");
+        printf("\n  /nospeed            : Pas de gestion automatique de la vitesse en baud par Hydris.\n" );
+        printf("                        (utile en cas d'utilisation d'un MINITEL 1 ou bien en cas de problèmes)\n");
 
-        printf("\n /debug              : Active le dump de tout ce qui arrive du frontal et du Minitel.\n" );
+        printf("\n  /debug              : Active le dump de tout ce qui arrive du frontal et du Minitel.\n" );
 
         printf("\n\n");
         return TRUE;
@@ -534,7 +543,6 @@ int main(int argc, char *argv[]) {
 
     if ( argc > 1 ){
        for( int i = 1; i<argc; i++ ){
-          //printf("%d. Argument %s\n",argc, argv[i]);
 
           if ( !strncmp( argv[1], "/serial:", 8 ) && strlen(argv[1]) > 9 ) 
              strcpy( serialPath, argv[1]+8 );
@@ -575,14 +583,14 @@ int main(int argc, char *argv[]) {
     int fdserial = serial_open(serialPath);
     if (fdserial < 0) {
           printf("Impossible d'ouvrir %s\n", serialPath);
-          return 1;
+          return TRUE;
     }
 
     system( "clear");   // Efface l'écran
     printf("\n\n→ Client Minitel pour frontal Hydris v%s\n\n", VERSION);
 
     // --- Socket serveur (Frontal) ---
-    int server_sock = -1;       // Pas de connexion pour l'instant
+    int server_sock = -1;       // Pas de connexion pour l'instant, maintenant à la demande.
 
     printf("→ Adresse du serveur Hydris %s:%d\n", hydrisAddr, serverPort);
     printf("→ Port série ouvert : %s\n", serialPath);
@@ -597,11 +605,11 @@ int main(int argc, char *argv[]) {
        serial_set_baudrate(fdserial, B4800 );          
     }
     
-    // Affiche la page d'accueil
-    sprintf( tampon, "\x1b\x3a\x32\x7E\x14\x1F\x30\x30\x18\x0C\x1b\x42________________________________________\x1BQ \x18\x0A\x0D\x1BU \x18\x1BM"
+    // Affiche la page d'accueil sur le Minitel local
+    sprintf( tampon, "\x1b\x39\x7b\x1b\x3a\x32\x7E\x14\x1F\x30\x30\x18\x0C\x1b\x42________________________________________\x1BQ \x18\x0A\x0D\x1BU \x18\x1BM"
                      "\x1B@Passerelle Minitel vers serveur Hydris\x1BM\x1F\x44\x41\x1B\x42~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1FHL\x1B]"
                      "\x1B\x42 Sommaire \x1B\\ Connexion\x1FJF\x1B]\x1B\x45 Shift + Cnx/Fin \x1B\\\x1b\x42 D\031Beconnexion\x0a\x0a\x0a\x0d"
-                     "\x1F\x56\x46\x1b\x42 2026, Minitel is still alive!\x1B@\x1B;\x60XR\x1B:iE" );
+                     "\x1F\x56\x46\x1b\x42 2026, Minitel is still alive!\x1B@\x1B;\x60XR\x1B:jE" );
     serial_write_string( fdserial, tampon, strlen(tampon) );
     
     if ( !speedMode )
@@ -674,11 +682,10 @@ int main(int argc, char *argv[]) {
 
                      case 1 :                               // Seconde touche de fonction Minitel
 
-                      // Demande de connexion au point d'accès si SOMMAIRE et aucune connexion établie
+                      // Demande de connexion au point d'accès si SOMMAIRE alors qu'aucune connexion n'est établie.
                       if ( chr == SOMMAIRE && server_sock < 0 ){
 
                          printf( "[    SYSTEM] Demande de connexion envoyée au point d'accès\n");
-
 
                         // --- Socket serveur (Frontal) ---
                         server_sock = socket(AF_INET, SOCK_STREAM, 0);
@@ -705,7 +712,8 @@ int main(int argc, char *argv[]) {
 
                         // --- Fin socket serveur (Frontal) --
 
-                        sprintf( tampon, "\x1F\x30\x30\x18\x1BHDemande de connexion...\x1BI" );
+                        //sprintf( tampon, "\x1F\x30\x30\x18\x1BHDemande de connexion...\x1BI" );
+                        sprintf( tampon, "\x1F\x30\x30\x18\x1BHRecherche du point d'acc\031Aes...\x1BI" );
                         serial_write_string( fdserial, tampon, strlen(tampon) );
 
                       }else // Fin SOMMAIRE cnx
@@ -822,11 +830,10 @@ int main(int argc, char *argv[]) {
                     printf("[   SERIAL] Connexion fermée\n");
                     close(fdserial);
                     fdserial = -1;
-                    return 0;
+                    return FALSE;
                 }
             } // Fin lecture série 
 
-                    
             //
             //       --- Lecture depuis le frontal ---
             //
@@ -854,18 +861,18 @@ int main(int argc, char *argv[]) {
                             serial_write_char(fdserial, chr);    // Echo sur Minitel
 
                             if ( chr == '\x1B' )
-                            instateServer = 1;
+                               instateServer = 1;
                             break;
 
                         case 1 : 
                             if ( chr == '\x3A' ){ 
-                            serial_write_char(fdserial, chr); // Echo sur Minitel.  TEST POUR MIN MAJ 
-                            instateServer = 2;
-                            break;
+                               serial_write_char(fdserial, chr); // Echo sur Minitel.  TEST POUR MIN MAJ 
+                               instateServer = 2;
+                               break;
                             }
                             if ( chr == '%' ){                   // % = 2eme chr de ACK demandé par Hydris
-                            instateServer = 20;
-                            break;
+                               instateServer = 20;
+                               break;
                             }
                             serial_write_char(fdserial, chr);    // Echo sur Minitel
                             instateServer = 0;
@@ -873,10 +880,10 @@ int main(int argc, char *argv[]) {
 
                         case 2 : 
                             if ( chr == 16 )                     // 0x10
-                            instateServer = 3;
+                               instateServer = 3;
                             else{
-                            serial_write_char(fdserial, chr); // Echo sur Minitel.  TEST POUR MIN MAJ 
-                            instateServer = 0;
+                               serial_write_char(fdserial, chr); // Echo sur Minitel.  TEST POUR MIN MAJ 
+                               instateServer = 0;
                             }
                             break;
 
@@ -884,7 +891,7 @@ int main(int argc, char *argv[]) {
                             switch( chr ){
                             case 0x41 : // 1200
 
-                                if ( !speedMode ) break;
+                                if ( !speedMode ) break;        // Pas de gestion variable de la vitesse  
 
                                 tx_buffer_clear(&COM_TXBuffer);
                                 serial_write_string( fdserial, "\x1B:kd", 4 );  // Configuration du Minitel en 1200bds
@@ -904,7 +911,7 @@ int main(int argc, char *argv[]) {
                                 serial_write_string( fdserial, "\x1b:kv", 4 );  // Configuration du Minitel en 4800bds
                                 tx_buffer_flush(fdserial, &COM_TXBuffer, currentSpeed );
                                 delay_ms(200);
-                                serial_set_baudrate(fdserial, B4800 );          // Changement de la vitesse du port local
+                                serial_set_baudrate(fdserial, B4800 );
                                 currentSpeed = 4800;
 
                                 printf("[   SERVEUR] Demande de changement de débit : 4800 bauds \n");
@@ -922,7 +929,7 @@ int main(int argc, char *argv[]) {
                                 serial_write_string( fdserial, "\x1B:k\x7F", 4 );  // Configuration du Minitel en 9600bds
                                 tx_buffer_flush(fdserial, &COM_TXBuffer, currentSpeed );
                                 delay_ms(200);
-                                serial_set_baudrate(fdserial, B9600 );          // Changement de la vitesse du port local
+                                serial_set_baudrate(fdserial, B9600 );
                                 currentSpeed = 9600;
 
                                 printf("[   SERVEUR] Demande de changement de débit : 9600 bauds \n");
@@ -933,39 +940,39 @@ int main(int argc, char *argv[]) {
 
                             case 20 : // ACK 
                                 if ( chr == 'L' )
-                                instateServer = 21;
+                                   instateServer = 21;
                                 else 
-                                instateServer = 0;
+                                   instateServer = 0;
                                 break;
 
                             case 21 : // ACK 
                                 if ( chr == 'e' )
-                                instateServer = 22;
+                                   instateServer = 22;
                                 else 
-                                instateServer = 0;
+                                   instateServer = 0;
                                 break;
 
                             case 22 : // ACK 
                                 if ( chr == 'N' )
-                                instateServer = 23;
+                                   instateServer = 23;
                                 else 
-                                instateServer = 0;
+                                   instateServer = 0;
                                 break;
 
                             case 23 : // Fin de ACK
 
-                                if ( chr == 'A' ){  // Demande de ACK complète 
+                                if ( chr == 'A' ){  // Demande de ACK complète: LeNA
 
-                                ip_compress(externalIP, bufIP);  // IP Externe sur 4 octets pour inclure dans la trame de ACK
-                                unsigned char ackmsg[]={'\x1B','\x39','\x68',65+typeMinitel,bufIP[0],bufIP[1],bufIP[2],bufIP[3],'\x0D'};
+                                    ip_compress(externalIP, bufIP);  // IP Externe sur 4 octets pour inclure dans la trame de ACK
+                                    unsigned char ackmsg[]={'\x1B','\x39','\x68',65+typeMinitel,bufIP[0],bufIP[1],bufIP[2],bufIP[3],'\x0D'};
 
-                                for(int i=0; i < 9; i++){
-                                    send(server_sock,&ackmsg[i],1,0);  
-                                    delay_ms(50);  
-                                }
-                                if ( Dump )
-                                    printf("[TX>FRONTAL] ACK OK\n");
-                                printf( "[    SYSTEM] Connexion acceptée par le point d'accès.\n");
+                                    for(int i=0; i < 9; i++){
+                                        send(server_sock,&ackmsg[i],1,0);  
+                                        delay_ms(50);  
+                                    }
+                                    if ( Dump )
+                                        printf("[TX>FRONTAL] ACK OK\n");
+                                    printf( "[    SYSTEM] Connexion acceptée par le point d'accès.\n");
 
                                 }
                                 instateServer = 0;
@@ -982,14 +989,14 @@ int main(int argc, char *argv[]) {
                         // Affiche les derniers messages 
                         tx_buffer_flush(fdserial, &COM_TXBuffer, currentSpeed);
 
-                        // Pause pour lecture des derniers message avant de repasser en attente
+                        // Pause pour lecture du dernier message avant de repasser en attente
                         delay_ms(3000); 
 
                         // Réaffiche page d'attente de démarrage
                         sprintf( tampon, "\x1b\x3a\x32\x7E\x14\x1F\x30\x30\x18\x0C\x1b\x42________________________________________\x1BQ \x18\x0A\x0D\x1BU \x18\x1BM"
-                                        "\x1B@ Passerelle de connexion vers Hydris!\x1BM\x1F\x44\x41\x1B\x42~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1FHL\x1B]"
-                                        "\x1B\x42 Sommaire \x1B\\ Connexion\x1FJF\x1B]\x1B\x45 Shift + Cnx/Fin \x1B\\\x1b\x42 D\031Beconnexion\x0a\x0a\x0a\x0d"
-                                        "\x1F\x56\x46\x1b\x42 2026, Minitel is still alive!\x1B@\x1B;\x60XR\x1B:iE" );
+                                         "\x1B@Passerelle Minitel vers serveur Hydris\x1BM\x1F\x44\x41\x1B\x42~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1FHL\x1B]"
+                                         "\x1B\x42 Sommaire \x1B\\ Connexion\x1FJF\x1B]\x1B\x45 Shift + Cnx/Fin \x1B\\\x1b\x42 D\031Beconnexion\x0a\x0a\x0a\x0d"
+                                         "\x1F\x56\x46\x1b\x42 2026, Minitel is still alive!\x1B@\x1B;\x60XR\x1B:jE" );
                         serial_write_string( fdserial, tampon, strlen(tampon) );
 
                         //break;
@@ -1046,5 +1053,5 @@ int main(int argc, char *argv[]) {
        close(fdserial);
     }
     free( tampon );
-    return 0;
+    return FALSE;
 }
