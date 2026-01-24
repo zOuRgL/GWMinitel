@@ -24,7 +24,7 @@ Options de la ligne de commande :
 | /nospeed                     | Pas de gestion automatique de la vitesse en baud par Hydris. |
 | /debug</strong>              | Active le dump de tout ce qui arrive du frontal et du Minitel. |
 
-<br>* Exemples: /dev/tty.usbserial-A5069RR4 sur Mac pour un câble FT232RL du vendeur R-Ecommerce sur eBay.<br> /dev/ttyUSB0 sous Debian Linux pour le même câble.<br><br>
+<br>* Exemples: /dev/tty.usbserial-A5069RR4 sur Mac pour un câble FT232RL du vendeur R-Ecommerce sur eBay ou /dev/ttyUSB0 sous Debian Linux.<br><br>
 
     Exemple minimal: ./gwminitel /serial:/dev/tty.usbserial-A5069RR4
 
