@@ -20,7 +20,7 @@ Options de la ligne de commande :
 
 | Paramètre                      | Libellé                                                                                            |
 |------------------------------|--------------------------------------------------------------------------------------------------------|
-| /serial:&lt;ttySerial&gt;    | Driver vers le port série sur lequel est connecté le Minitel (OBLIGATOIRE). *|
+| /serial:&lt;ttySerial&gt;    | Driver vers le port série sur lequel est connecté le Minitel (OBLIGATOIRE) *|
 | /server:&lt;server&gt;       | Nom DNS ou adresse IPV4 du serveur Hydris sur Internet (défaut galaxy.microtel.fr) |
 | /port:&lt;port num&gt;       | Numéro de port du serveur Hydris (défaut 50456) |
 | /nospeed                     | Pas de gestion automatique de la vitesse en baud par Hydris. |
