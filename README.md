@@ -4,6 +4,8 @@
 
  GwMinitel - Passerelle Minitel vers le serveur Hydris via Internet v0.30
 
+Options de la ligne de commande : 
+
  /serial:<ttySerial> : 
      Driver vers le port série sur lequel est connecté le Minitel. (OBLIGATOIRE)
      Exemples: /dev/tty.usbserial-A5069RR4 sur Mac pour un câble FT232RL 
