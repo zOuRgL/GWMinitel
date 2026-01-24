@@ -15,7 +15,7 @@ Options de la ligne de commande :
               du vendeur R-Ecommerce sur eBay.
               /dev/ttyUSB0 sous Debian Linux pour le même câble.
 
- <strong>/server:&lt;ip server&gt;</strong> : Nom DNS ou adresse IPV4 du serveur Hydris sur Internet (défaut galaxy.microtel.fr)
+ <strong>/server:&lt;server&gt;</strong>    : Nom DNS ou adresse IPV4 du serveur Hydris sur Internet (défaut galaxy.microtel.fr)
 
  <strong>/port:&lt;port num&gt;</strong>    : Numéro de port du serveur Hydris (défaut 50456)
 
