@@ -18,7 +18,7 @@ Options de la ligne de commande :
 
  <strong>/serial:&lt;ttySerial&gt;</strong> : Driver vers le port série sur lequel est connecté le Minitel (OBLIGATOIRE).<br><br>
  &nbsp;&nbsp;&nbsp;Exemples: /dev/tty.usbserial-A5069RR4 sur Mac pour un câble FT232RL du vendeur R-Ecommerce sur eBay.<br>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/dev/ttyUSB0 sous Debian Linux pour le même câble.<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/dev/ttyUSB0 sous Debian Linux pour le même câble.<br>
 
  <strong>/server:&lt;server&gt;</strong>    : Nom DNS ou adresse IPV4 du serveur Hydris sur Internet (défaut galaxy.microtel.fr)
 
