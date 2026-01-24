@@ -24,21 +24,7 @@ Options de la ligne de commande :
 | /nospeed                     | Pas de gestion automatique de la vitesse en baud par Hydris. |
 | /debug</strong>              | Active le dump de tout ce qui arrive du frontal et du Minitel. |
 
-<br>* Exemples: /dev/tty.usbserial-A5069RR4 sur Mac pour un câble FT232RL du vendeur R-Ecommerce sur eBay.<br>/dev/ttyUSB0 sous Debian Linux pour le même câble.<br><br>
-
- <strong>/serial:&lt;ttySerial&gt;</strong> : Driver vers le port série sur lequel est connecté le Minitel (OBLIGATOIRE).<br><br>
- &nbsp;&nbsp;&nbsp;Exemples: /dev/tty.usbserial-A5069RR4 sur Mac pour un câble FT232RL du vendeur R-Ecommerce sur eBay.<br>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/dev/ttyUSB0 sous Debian Linux pour le même câble.<br>
-
- <strong>/server:&lt;server&gt;</strong>    : Nom DNS ou adresse IPV4 du serveur Hydris sur Internet (défaut galaxy.microtel.fr)
-
- <strong>/port:&lt;port num&gt;</strong>    : Numéro de port du serveur Hydris (défaut 50456)
-
- <strong>/nospeed</strong>            : Pas de gestion automatique de la vitesse en baud par Hydris.
-                       (utile en cas de problèmes)
-
- <strong>/debug</strong>              : Active le dump de tout ce qui arrive du frontal et du Minitel.
-
+<br>* Exemples: /dev/tty.usbserial-A5069RR4 sur Mac pour un câble FT232RL du vendeur R-Ecommerce sur eBay.<br> /dev/ttyUSB0 sous Debian Linux pour le même câble.<br><br>
 
     Exemple minimal: ./gwminitel /serial:/dev/tty.usbserial-A5069RR4
 
