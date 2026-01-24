@@ -17,12 +17,12 @@ Options de la ligne de commande :
 
  <strong>/server:<ip server></strong> : Nom DNS ou adresse IPV4 du serveur Hydris sur Internet (défaut galaxy.microtel.fr)
 
- /port:<port num>    : Numéro de port du serveur Hydris (défaut 50456)
+ <strong>/port:<port num> </strong>   : Numéro de port du serveur Hydris (défaut 50456)
 
- /nospeed            : Pas de gestion automatique de la vitesse en baud par Hydris.
+ <strong>/nospeed </strong>           : Pas de gestion automatique de la vitesse en baud par Hydris.
                        (utile en cas de problèmes)
 
- /debug              : Active le dump de tout ce qui arrive du frontal et du Minitel.
+ <strong>/debug </strong>             : Active le dump de tout ce qui arrive du frontal et du Minitel.
 
 
     Exemple: ./gwminitel /serial:/dev/tty.usbserial-A5069RR4
