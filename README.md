@@ -2,8 +2,10 @@
                                             VERSION DE TEST ! 
 
 
- GWMINITEL - Passerelle Minitel vers le moniteur Videotex Hydris via Internet
+   GWMINITEL - Passerelle Minitel vers le moniteur Videotex Hydris via Internet
    ____________________________________________________________________________
+
+Un câble USB -> DIN sera utilisé pour la liaison entre le PC et le Minitel
 
 Options de la ligne de commande : 
 
