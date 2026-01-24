@@ -1,7 +1,4 @@
 
-                                            VERSION DE TEST ! 
-
-
 <p align="center">
   GWMINITEL - Passerelle Internet pour Minitel vers le moniteur Videotex Hydris
 </p>
