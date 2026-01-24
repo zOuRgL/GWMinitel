@@ -8,7 +8,7 @@
 <p align="center">
 Ce logiciel de passerelle vous permettra de vous connecter au serveur Minitel<br>
 Hydris avec un vrai Minitel comme utilisé dans les années 80/90'.<br><br>
-Par défaut, l'affichage des pages classiques sera en 4800bauds pour plus de fluidité<br>
+Par défaut, l'affichage des pages classiques sera en 4800 bauds pour plus de fluidité<br>
 et les forums graphiques, eux, seront affichés en 1200 bauds pour une expérience d'origine.<br>
 Si vous souhaiter naviguer totalement comme à l'époque en 1200 bauds, il faut utiliser l'option <b>/nospeed</b>.<br><br>
 Un câble USB -> DIN sera utilisé pour la liaison entre le PC et le Minitel
@@ -16,11 +16,9 @@ Un câble USB -> DIN sera utilisé pour la liaison entre le PC et le Minitel
   
 Options de la ligne de commande : 
 
- <strong>/serial:&lt;ttySerial&gt;</strong> : 
-     Driver vers le port série sur lequel est connecté le Minitel (OBLIGATOIRE).
-     Exemples: /dev/tty.usbserial-A5069RR4 sur Mac pour un câble FT232RL 
-              du vendeur R-Ecommerce sur eBay.
-              /dev/ttyUSB0 sous Debian Linux pour le même câble.
+ <strong>/serial:&lt;ttySerial&gt;</strong> : Driver vers le port série sur lequel est connecté le Minitel (OBLIGATOIRE).<br>
+     Exemples: /dev/tty.usbserial-A5069RR4 sur Mac pour un câble FT232RL du vendeur R-Ecommerce sur eBay.<br>
+               /dev/ttyUSB0 sous Debian Linux pour le même câble.
 
  <strong>/server:&lt;server&gt;</strong>    : Nom DNS ou adresse IPV4 du serveur Hydris sur Internet (défaut galaxy.microtel.fr)
 
