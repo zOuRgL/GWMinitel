@@ -12,8 +12,8 @@ Par défaut, l'affichage des pages classiques sera en 4800 bauds pour plus de fl
 et les forums graphiques, eux, seront affichés en 1200 bauds pour une expérience d'origine.<br>
 Si vous souhaiter naviguer totalement comme à l'époque en 1200 bauds, il faut utiliser l'option <b>/nospeed</b>.<br><br>
 Un câble USB -> DIN sera utilisé pour la liaison entre le PC et le Minitel<br><br>
-Grâce à Jean-arthur Silve qui a créé MiniPavi, une connexion est également possible en cliquant sur le lien suivant<br>
-<a href="https://www.minipavi.fr/emulminitel/indexws.php?url=wss%3A%2F%2Fgalaxy.microtel.fr%3A50123&speed=4800&color=false" title="Galaxy via MiniPavi!">Galaxy via MiniPavi!</a>
+Grâce à Jean-arthur Silve qui a créé MiniPavi (https://www.minipavi.fr/), une connexion est également possible en cliquant sur le lien suivant<br>
+<a href="https://www.minipavi.fr/emulminitel/indexws.php?url=wss%3A%2F%2Fgalaxy.microtel.fr%3A50123&speed=4800&color=false" title="Galaxy via MiniPavi!">Galaxy via MiniPavi !</a>
 </p><br>
   
 Options de la ligne de commande : 
