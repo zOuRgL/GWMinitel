@@ -11,7 +11,7 @@ Hydris avec un vrai Minitel comme utilisé dans les années 80/90'.<br><br>
 Par défaut, l'affichage des pages classiques sera en 4800 bauds pour plus de fluidité<br>
 et les forums graphiques, eux, seront affichés en 1200 bauds pour une expérience d'origine.<br>
 Si vous souhaiter naviguer totalement comme à l'époque en 1200 bauds, il faut utiliser l'option <b>/nospeed</b>.<br><br>
-Un câble USB -> DIN Minitel sera utilisé pour la liaison entre le PC et le Minitel<br>(Vous pouvez trouver de très bons câble USB vers Minitel sur eBay chez le sympatique vendeur R-Ecommerce)<br><br>
+Un câble USB -> DIN Minitel sera utilisé pour la liaison entre le PC et le Minitel<br>(Vous pouvez trouver de très bons câbles Minitel sur eBay chez le sympatique vendeur R-Ecommerce)<br><br>
 Grâce à Jean-arthur SILVE qui a créé MiniPavi et à l'excellent émulateur Minitel développé par Frédéric BISSON (un grand merci à eux deux!), une connexion est également possible en cliquant sur le lien suivant:<br>
 <a href="https://www.minipavi.fr/emulminitel/indexws.php?url=wss%3A%2F%2Fgalaxy.microtel.fr%3A50123&speed=4800&color=false" title="Galaxy via MiniPavi!">Galaxy via MiniPavi !</a>
 </p><br>
