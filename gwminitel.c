@@ -62,7 +62,7 @@
 #include <netdb.h>
 
 //
-#define VERSION       "0.32"
+#define VERSION       "0.33"
 // 
 
 #define FALSE              0
@@ -607,9 +607,9 @@ int main(int argc, char *argv[]) {
     
     // Affiche la page d'accueil sur le Minitel local
     sprintf( tampon, "\x1b\x39\x7b\x1b\x3a\x32\x7E\x14\x1F\x30\x30\x18\x0C\x1b\x42________________________________________\x1BQ \x18\x0A\x0D\x1BU \x18\x1BM"
-                     "\x1B@Passerelle Minitel vers serveur Hydris\x1BM\x1F\x44\x41\x1B\x42~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1FHL\x1B]"
-                     "\x1B\x42 Sommaire \x1B\\ Connexion\x1FJF\x1B]\x1B\x45 Shift + Cnx/Fin \x1B\\\x1b\x42 D\031Beconnexion\x0a\x0a\x0a\x0d"
-                     "\x1F\x56\x46\x1b\x42 2026, Minitel is still alive!\x1B@\x1B;\x60XR\x1B:jE" );
+                     "\x1B@Passerelle Minitel vers serveur Hydris\x1BM\x1F\x44\x41\x1B\x42~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1FIL\x1B]"
+                     "\x1B\x42 Sommaire \x1B\\ Connexion\x1FKF\x1B]\x1B\x45 Shift + Cnx/Fin \x1B\\\x1b\x42 D\031Beconnexion\x0a\x0a\x0a\x0d"
+                     "\x1F\x45\x63\x1b\x42v%s\x1F\x56\x46\x1b\x42 2026, Minitel is still alive!\x1B@\x1B;\x60XR\x1B:jE", VERSION );
     serial_write_string( fdserial, tampon, strlen(tampon) );
     
     if ( !speedMode )
@@ -934,6 +934,11 @@ int main(int argc, char *argv[]) {
 
                                 printf("[   SERVEUR] Demande de changement de débit : 9600 bauds \n");
                                 break;    
+
+                            case 0x45 : // Demande d'effacement du buffer de réception
+                                tx_buffer_clear(&COM_TXBuffer);
+                                break;
+
                             } // Fin switch
                             instateServer = 0;
                             break;
