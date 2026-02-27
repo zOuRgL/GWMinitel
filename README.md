@@ -1,6 +1,7 @@
 
 <p align="center">
   GWMINITEL - Passerelle Internet pour Minitel vers le moniteur Videotex Hydris
+  <a href="https://galaxy.microtel.fr" title="Galaxy on the web!">Galaxy on the web !</a>
 </p>
 
    ____________________________________________________________________________
