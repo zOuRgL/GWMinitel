@@ -1,14 +1,15 @@
 
 <p align="center">
   GWMINITEL - Passerelle Internet pour Minitel vers le moniteur Videotex Hydris
-  <a href="https://galaxy.microtel.fr" title="Galaxy on the web!">Galaxy on the web !</a>
 </p>
 
    ____________________________________________________________________________
 
 <p align="center">
 Ce logiciel de passerelle vous permettra de vous connecter au serveur Minitel<br>
-Hydris avec un vrai Minitel comme utilisé dans les années 80/90'.<br><br>
+Hydris avec un vrai Minitel comme utilisé dans les années 80/90'.<br>
+<a href="https://galaxy.microtel.fr" title="Galaxy on the web!">Galaxy on the web !</a><br><br>
+  
 Par défaut, l'affichage des pages classiques sera en 4800 bauds pour plus de fluidité<br>
 et les forums graphiques, eux, seront affichés en 1200 bauds pour une expérience d'origine.<br>
 Si vous souhaiter naviguer totalement comme à l'époque en 1200 bauds, il faut utiliser l'option <b>/nospeed</b>.<br><br>
